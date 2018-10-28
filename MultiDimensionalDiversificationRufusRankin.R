@@ -8,6 +8,8 @@
 
 require(quantmod)
 require(purrr)
+require(magrittr)
+require(stringr)
 
 ###
 ###  get asset class returns.
@@ -46,7 +48,8 @@ download.file(eurekahedge_url, destfile = "EurekaHedge_Indices.zip", mode = 'wb'
 unzip("EurekaHedge_Indices.zip")
 eh <- read.csv("EurekaHedge_Indices.csv", header = TRUE, stringsAsFactors = F)
 
-# eh %>% filter(str_detect(Index.Name, pattern = "Europe Long Short Equities Hedge Fund Index")) %>% select(Index.Name, NAV, Date, EHIID)
+eh %>% filter(str_detect(Index.Name, pattern = "Europe Long Short Equities Hedge Fund Index")) %>% select(Index.Name, NAV, Date, EHIID)
+eh %>% filter(str_detect(Index.Name, pattern = "Event Driven")) %>% select(Index.Name, NAV, Date, EHIID)
 
 ELSEHFI     <- eh %>% filter(EHIID == 86) %>% mutate(Return = NAV/100) %>% select(Date, Return) %>% arrange(Date)
 ELSEHFI.xts <- xts(ELSEHFI$Return, order.by = ELSEHFI$Date)
