@@ -53,7 +53,7 @@ eh$Date <- as.Date(eh$Date, format = "%d-%b-%Y")
 
 str(eh)
 
-eh %>% filter(str_detect(Name, pattern = "Europe Long Short Equities Hedge Fund Index")) %>% select(Index.Name, NAV, Date, EHIID)
+eh %>% filter(str_detect(Index.Name, pattern = "Europe Long Short Equities Hedge Fund Index")) %>% select(Index.Name, NAV, Date, EHIID)
 eh %>% filter(str_detect(Index.Name, pattern = "Event Driven Hedge Fund Index")) %>% group_by(EHIID, Index.Name) %>% summarise(total.count=n())
 eh %>% filter(str_detect(Index.Name, pattern = "CTA")) %>% group_by(EHIID, Index.Name) %>% summarise(total.count=n())
 
